@@ -1,0 +1,20 @@
+#!/bin/bash
+# نصب پشت‌سرهم همه‌ی ماژول‌های بک‌اند. هر مرحله بکاپ می‌گیرد و با خطا متوقف می‌شود.
+# استفاده: bash install-all.sh [مسیر_پروژه]
+set -e
+ROOT="${1:-/home/ghestine/domains/ghestine.ir/Ghestine}"; H="$(cd "$(dirname "$0")" && pwd)"
+echo "### 1/12 چندمستاجری"; bash "$H/backend/tenancy/install.sh" "$ROOT"
+echo "### 2/12 هسته (طرح‌ها، کارت مجازی، درگاه، مدارک)"; bash "$H/backend/core/install.sh" "$ROOT"
+echo "### 3/12 امنیت ورود (کپچا، OTP)"; bash "$H/backend/security/install.sh" "$ROOT"
+echo "### 4/12 عملیات (اعلام واریز، طرف‌حساب‌ها، بازاریاب‌ها، تنظیمات اپ)"; bash "$H/backend/ops/install.sh" "$ROOT"
+echo "### 5/12 سازمانی (حسابرسی، دفتر کل، health، پشتیبان خودکار)"; bash "$H/backend/enterprise/install.sh" "$ROOT"
+echo "### 6/12 قراردادها (داخل تعریف وام)"; bash "$H/backend/contracts/install.sh" "$ROOT"
+echo "### 7/12 دسترسی ریز و رمز دومرحله‌ای"; bash "$H/backend/iam/install.sh" "$ROOT"
+echo "### 8/12 زیرساخت عملیاتی (لاگ، صف کار)"; bash "$H/backend/platform/install.sh" "$ROOT"
+echo "### 9/12 صندوق اعلان‌ها"; bash "$H/backend/notify/install.sh" "$ROOT"
+echo "### 10/12 پشتیبانی و تیکت"; bash "$H/backend/support/install.sh" "$ROOT"
+echo "### 11/12 اعتبارسنجی (اعتبارسنجی ایران)"; bash "$H/backend/credit/install.sh" "$ROOT"
+echo "### 12/12 درخواست وام مشتری"; bash "$H/backend/loans/install.sh" "$ROOT"
+echo "همه‌ی ماژول‌ها ساخته شدند. حالا یک مایگریشن واحد بزنید (بعد از بکاپ دیتابیس):"
+echo "  dotnet ef migrations add AddDigibilePayCore -p src/Ghestine.Infrastructure -s src/Ghestine.API"
+echo "  dotnet ef database update -p src/Ghestine.Infrastructure -s src/Ghestine.API"

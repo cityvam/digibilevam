@@ -1,0 +1,20 @@
+[Unit]
+Description=DigitalPay web (Next.js)
+After=network.target ghestine.service
+[Service]
+User=dpweb
+WorkingDirectory=/opt/digitalpay-web
+EnvironmentFile=/etc/digitalpay/web.env
+Environment=NODE_ENV=production
+Environment=NEXT_TELEMETRY_DISABLED=1
+ExecStart=/usr/bin/env node server.js
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/digitalpay-web/.next/cache
+ProtectHome=true
+PrivateTmp=true
+CapabilityBoundingSet=
+[Install]
+WantedBy=multi-user.target

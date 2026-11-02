@@ -1,0 +1,26 @@
+{
+  "name": "digitalpay-web",
+  "version": "2.0.0",
+  "private": true,
+  "description": "فرانت‌اند Next.js (App Router) دیجی‌بایل پی روی API ی ASP.NET Core",
+  "engines": { "node": ">=20.9" },
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -H 127.0.0.1 -p 3000",
+    "mock": "node mock/mock-api.mjs",
+    "test": "node --test test/*.test.mjs",
+    "preview": "node tools/render-all.mjs"
+  },
+  "dependencies": {
+    "next": "^15.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}
